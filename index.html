@@ -3,226 +3,644 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>С Днем Рождения, Наталья!</title>
+    <title>С Днем Рождения!</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Pacifico&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap');
 
         :root {
-            --primary-color: #89CFF0; /* Небесно-голубой */
-            --secondary-color: #ffffff;
-            --text-color: #557A95;
-            --accent-color: #FFD700;
+            --sun-glow: #FFD700;
+            --space-dark: #0a0a1a;
+            --space-light: #1a1a3a;
+            --star-white: #ffffff;
+            --nebula-purple: #9b59b6;
+            --nebula-blue: #3498db;
+            --nebula-pink: #e91e63;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body, html {
-            margin: 0;
-            padding: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(180deg, #89CFF0 0%, #E0F7FA 100%);
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            background: radial-gradient(ellipse at center, var(--space-light) 0%, var(--space-dark) 100%);
+            color: var(--star-white);
+            position: relative;
         }
 
-        /* Анимация фона (облака) */
-        .clouds {
+        /* Звездное небо */
+        .stars {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 0;
             overflow: hidden;
         }
 
-        .cloud {
+        .star {
             position: absolute;
-            background: rgba(255, 255, 255, 0.6);
+            background: var(--star-white);
             border-radius: 50%;
-            filter: blur(20px);
-            animation: float 20s infinite linear;
+            animation: twinkle infinite ease-in-out;
         }
 
-        .cloud:nth-child(1) { width: 300px; height: 300px; top: 10%; left: -10%; animation-duration: 25s; }
-        .cloud:nth-child(2) { width: 400px; height: 400px; top: 40%; left: -20%; animation-duration: 35s; animation-delay: -5s; }
-        .cloud:nth-child(3) { width: 200px; height: 200px; top: 70%; left: -15%; animation-duration: 20s; animation-delay: -10s; }
-
-        @keyframes float {
-            0% { transform: translateX(-100px); }
-            100% { transform: translateX(110vw); }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* Контейнер поздравления */
-        .card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 600px;
-            width: 90%;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1.5s ease-out forwards;
-            position: relative;
+        /* Солнечная система контейнер */
+        .solar-system {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vmin;
+            height: 100vmin;
             z-index: 10;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        /* Солнце */
+        .sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #fff7e6 0%, #ffd700 30%, #ff8c00 70%, #ff4500 100%);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 60px rgba(255, 215, 0, 0.8),
+                0 0 100px rgba(255, 140, 0, 0.6),
+                0 0 150px rgba(255, 69, 0, 0.4);
+            animation: sunPulse 3s infinite ease-in-out;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        @keyframes sunPulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 
+                    0 0 60px rgba(255, 215, 0, 0.8),
+                    0 0 100px rgba(255, 140, 0, 0.6),
+                    0 0 150px rgba(255, 69, 0, 0.4);
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.05);
+                box-shadow: 
+                    0 0 80px rgba(255, 215, 0, 1),
+                    0 0 120px rgba(255, 140, 0, 0.8),
+                    0 0 180px rgba(255, 69, 0, 0.6);
             }
         }
 
-        h1 {
-            font-family: 'Pacifico', cursive;
-            color: #4A90A4;
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: #8899A6;
-            margin-bottom: 2rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .message {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 2.5rem;
-            color: #666;
-        }
-
-        .btn {
-            background: linear-gradient(45deg, #89CFF0, #5DADE2);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            box-shadow: 0 5px 15px rgba(137, 207, 240, 0.4);
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(137, 207, 240, 0.6);
-        }
-
-        .btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Конфетти */
-        #confetti-canvas {
+        /* Орбиты */
+        .orbit {
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: rotate linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Планеты */
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            top: 50%;
+            right: -10px;
+            transform: translateY(-50%);
+        }
+
+        .planet:hover {
+            transform: translateY(-50%) scale(1.3);
+            filter: brightness(1.3);
+        }
+
+        .planet.mercury {
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(45deg, #b5b5b5, #8c8c8c, #696969);
+            box-shadow: 0 0 10px rgba(181, 181, 181, 0.5);
+        }
+
+        .planet.venus {
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(45deg, #ffd700, #ff8c00, #daa520);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+
+        .planet.earth {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #4169e1, #32cd32, #1e90ff);
+            box-shadow: 0 0 20px rgba(65, 105, 225, 0.8);
+        }
+
+        .planet.mars {
+            width: 14px;
+            height: 14px;
+            background: linear-gradient(45deg, #dc143c, #8b0000, #cd5c5c);
+            box-shadow: 0 0 15px rgba(220, 20, 60, 0.7);
+        }
+
+        .planet.jupiter {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(45deg, #deb887, #d2691e, #cd853f, #daa520);
+            box-shadow: 0 0 25px rgba(210, 105, 30, 0.8);
+        }
+
+        .planet.saturn {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #f4a460, #daa520, #b8860b);
+            box-shadow: 0 0 20px rgba(218, 165, 32, 0.7);
+            position: relative;
+        }
+
+        .planet.saturn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateX(75deg);
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(218, 165, 32, 0.5);
+            border-radius: 50%;
+        }
+
+        .planet.uranus {
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(45deg, #afeeee, #5f9ea0, #4682b4);
+            box-shadow: 0 0 18px rgba(175, 238, 238, 0.7);
+        }
+
+        .planet.neptune {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #4169e1, #0000cd, #191970);
+            box-shadow: 0 0 18px rgba(65, 105, 225, 0.8);
+        }
+
+        /* Модальное окно с поздравлением */
+        .modal-overlay {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 20;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
 
-        /* Адаптивность для мобильных */
-        @media (max-width: 480px) {
-            h1 { font-size: 2.2rem; }
-            .card { padding: 2rem; }
-            .message { font-size: 1rem; }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: linear-gradient(135deg, rgba(30, 30, 60, 0.95), rgba(60, 30, 80, 0.95));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.8) translateY(50px);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 
+                0 0 40px rgba(255, 215, 0, 0.3),
+                0 0 80px rgba(147, 112, 219, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: modalGlow 4s infinite ease-in-out;
+        }
+
+        @keyframes modalGlow {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .modal-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .modal-message {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            margin-bottom: 2rem;
+        }
+
+        .modal-close {
+            background: linear-gradient(45deg, #ffd700, #ff8c00);
+            color: #1a1a3a;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .modal-close:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Заголовок страницы */
+        .page-title {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            text-align: center;
+        }
+
+        .page-title h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #ffd700, #ff8c00, #ff69b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            animation: titleGlow 3s infinite ease-in-out;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        /* Инструкция */
+        .instruction {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .solar-system {
+                width: 80vmin;
+                height: 80vmin;
+            }
+
+            .sun {
+                width: 60px;
+                height: 60px;
+            }
+
+            .page-title h1 {
+                font-size: 1.8rem;
+            }
+
+            .modal {
+                padding: 2rem;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-message {
+                font-size: 1rem;
+            }
+        }
+
+        /* Частицы вокруг солнца */
+        .particles {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.8), transparent);
+            border-radius: 50%;
+            animation: particleFloat infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(100px, -100px) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Звездное небо -->
+    <div class="stars" id="stars"></div>
 
-    <!-- Фоновая анимация -->
-    <div class="clouds">
-        <div class="cloud"></div>
-        <div class="cloud"></div>
-        <div class="cloud"></div>
+    <!-- Заголовок -->
+    <div class="page-title">
+        <h1>С Днем Рождения!</h1>
+        <div class="page-subtitle">Космическое поздравление</div>
     </div>
 
-    <!-- Холст для конфетти -->
-    <canvas id="confetti-canvas"></canvas>
+    <!-- Солнечная система -->
+    <div class="solar-system" id="solarSystem">
+        <!-- Солнце -->
+        <div class="sun" data-planet="sun"></div>
 
-    <!-- Основное содержимое -->
-    <div class="card">
-        <h1>С Днем Рождения, Наталья!</h1>
-        <div class="subtitle">Тебе сегодня 49!</div>
-        
-        <p class="message">
-            Дорогая мама! Поздравляю тебя с этим замечательным днем.<br><br>
-            49 лет — это прекрасный возраст, когда женская мудрость сочетается с невероятной энергией, а опыт подсказывает верные решения. Желаю тебе крепкого здоровья, бесконечного вдохновения и чтобы каждый день приносил только радостные новости.<br><br>
-            Пусть твои глаза всегда сияют от счастья, а дом будет полон уюта и любви. Ты — самое дорогое, что у меня есть!
-        </p>
+        <!-- Орбиты и планеты -->
+        <div class="orbit" style="width: 120px; height: 120px; animation-duration: 8s;">
+            <div class="planet mercury" data-planet="mercury"></div>
+        </div>
 
-        <button class="btn" onclick="startCelebration()">✨ Получить подарок ✨</button>
+        <div class="orbit" style="width: 170px; height: 170px; animation-duration: 12s;">
+            <div class="planet venus" data-planet="venus"></div>
+        </div>
+
+        <div class="orbit" style="width: 230px; height: 230px; animation-duration: 16s;">
+            <div class="planet earth" data-planet="earth"></div>
+        </div>
+
+        <div class="orbit" style="width: 290px; height: 290px; animation-duration: 20s;">
+            <div class="planet mars" data-planet="mars"></div>
+        </div>
+
+        <div class="orbit" style="width: 380px; height: 380px; animation-duration: 28s;">
+            <div class="planet jupiter" data-planet="jupiter"></div>
+        </div>
+
+        <div class="orbit" style="width: 470px; height: 470px; animation-duration: 36s;">
+            <div class="planet saturn" data-planet="saturn"></div>
+        </div>
+
+        <div class="orbit" style="width: 550px; height: 550px; animation-duration: 44s;">
+            <div class="planet uranus" data-planet="uranus"></div>
+        </div>
+
+        <div class="orbit" style="width: 630px; height: 630px; animation-duration: 52s;">
+            <div class="planet neptune" data-planet="neptune"></div>
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Инструкция -->
+    <div class="instruction">
+        ✨ Кликни на планету или солнце, чтобы открыть поздравление ✨
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-icon" id="modalIcon">🌟</div>
+            <h2 class="modal-title" id="modalTitle">Заголовок</h2>
+            <p class="modal-message" id="modalMessage">Текст поздравления</p>
+            <button class="modal-close" onclick="closeModal()">Закрыть</button>
+        </div>
+    </div>
+
     <script>
-        function startCelebration() {
-            // Звуковой эффект (опционально, браузеры могут блокировать автоплей, но по клику работает)
-            // Здесь мы запускаем визуальный салют
-            
-            const duration = 3000;
-            const end = Date.now() + duration;
+        // Поздравления для каждой планеты
+        const greetings = {
+            sun: {
+                icon: '☀️',
+                title: 'Солнце нашей жизни!',
+                message: 'Ты как солнце — освещаешь каждый день теплом и заботой! Твоя энергия бесконечна, а любовь согревает даже в самые холодные дни. Пусть твой свет никогда не угасает!'
+            },
+            mercury: {
+                icon: '☿️',
+                title: 'Быстрота мысли!',
+                message: 'Желаю тебе такой же лёгкости и скорости в достижении целей! Пусть все мечты исполняются мгновенно, а удача всегда будет на твоей стороне!'
+            },
+            venus: {
+                icon: '♀️',
+                title: 'Красота и гармония!',
+                message: 'Ты воплощение красоты и изящества! Пусть каждый день приносит вдохновение, а жизнь будет наполнена любовью, радостью и прекрасными моментами!'
+            },
+            earth: {
+                icon: '🌍',
+                title: 'Опора и стабильность!',
+                message: 'Ты — наш домашний уют и надёжная опора! Желаем тебе крепкого здоровья, внутреннего равновесия и чтобы жизнь цвела как прекрасный сад!'
+            },
+            mars: {
+                icon: '♂️',
+                title: 'Энергия и сила!',
+                message: 'Пусть твоя внутренняя сила растёт с каждым днём! Желаю неутомимой энергии для всех начинаний и побед на каждом пути!'
+            },
+            jupiter: {
+                icon: '♃',
+                title: 'Мудрость и изобилие!',
+                message: 'Как самая большая планета, пусть твоё счастье будет безграничным! Мудрости, процветания и исполнения самых заветных желаний!'
+            },
+            saturn: {
+                icon: '♄',
+                title: 'Красота колец!',
+                message: 'Твоя жизнь прекрасна как кольца Сатурна — каждый год добавляет новую грань красоты! Пусть каждый момент сияет особенным светом!'
+            },
+            uranus: {
+                icon: '♅',
+                title: 'Уникальность!',
+                message: 'Ты уникальна и неповторима! Желаю всегда оставаться собой, открывать новые горизонты и наслаждаться каждым открытием!'
+            },
+            neptune: {
+                icon: '♆',
+                title: 'Глубина чувств!',
+                message: 'Твоё сердце глубоко как океаны Нептуна! Пусть жизнь будет полна волшебства, тайн и прекрасных сюрпризов!'
+            }
+        };
 
-            // Запуск нескольких волн конфетти
-            const interval = setInterval(() => {
-                if (Date.now() > end) {
-                    clearInterval(interval);
-                    return;
-                }
+        // Создание звёзд
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 200;
 
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.6 },
-                    colors: ['#89CFF0', '#FFD700', '#FFFFFF', '#FFB6C1']
-                });
-            }, 250);
-
-            // Дополнительный мощный залп в центр
-            setTimeout(() => {
-                confetti({
-                    particleCount: 150,
-                    spread: 100,
-                    origin: { y: 0.5 },
-                    scalar: 1.2,
-                    colors: ['#FFD700', '#FF69B4']
-                });
-            }, 500);
-            
-            // Изменение текста кнопки
-            const btn = document.querySelector('.btn');
-            btn.textContent = "Ура! С праздником! 🎉";
-            btn.style.background = "linear-gradient(45deg, #FFD700, #FFA500)";
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                star.style.animationDuration = `${Math.random() * 2 + 1}s`;
+                
+                starsContainer.appendChild(star);
+            }
         }
 
-        // Небольшой приветственный салют при загрузке
-        window.onload = () => {
-            setTimeout(() => {
-                confetti({
-                    particleCount: 50,
-                    spread: 60,
-                    origin: { y: 0.7 },
-                    colors: ['#89CFF0', '#FFFFFF']
+        // Открытие модального окна
+        function openModal(planet) {
+            const greeting = greetings[planet];
+            if (!greeting) return;
+
+            document.getElementById('modalIcon').textContent = greeting.icon;
+            document.getElementById('modalTitle').textContent = greeting.title;
+            document.getElementById('modalMessage').textContent = greeting.message;
+            
+            document.getElementById('modalOverlay').classList.add('active');
+            
+            // Эффект конфетти
+            createConfetti();
+        }
+
+        // Закрытие модального окна
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        }
+
+        // Конфетти эффект
+        function createConfetti() {
+            const colors = ['#ffd700', '#ff8c00', '#ff69b4', '#9b59b6', '#3498db'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = `${Math.random() * 100}%`;
+                    confetti.style.top = '-10px';
+                    confetti.style.width = `${Math.random() * 10 + 5}px`;
+                    confetti.style.height = `${Math.random() * 10 + 5}px`;
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.zIndex = '999';
+                    confetti.style.pointerEvents = 'none';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    const duration = Math.random() * 3 + 2;
+                    const rotation = Math.random() * 720;
+                    
+                    confetti.animate([
+                        { transform: `translateY(0) rotate(0deg)`, opacity: 1 },
+                        { transform: `translateY(${window.innerHeight}px) rotate(${rotation}deg)`, opacity: 0 }
+                    ], {
+                        duration: duration * 1000,
+                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    }).onfinish = () => confetti.remove();
+                }, i * 50);
+            }
+        }
+
+        // Обработчики событий
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+
+            // Добавляем обработчики кликов на планеты
+            document.querySelectorAll('[data-planet]').forEach(element => {
+                element.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const planet = element.getAttribute('data-planet');
+                    openModal(planet);
                 });
-            }, 1000);
-        };
+            });
+
+            // Закрытие по клику вне модального окна
+            document.getElementById('modalOverlay').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('modalOverlay')) {
+                    closeModal();
+                }
+            });
+
+            // Закрытие по ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        });
     </script>
 </body>
 </html>
