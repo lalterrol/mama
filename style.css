@@ -2,17 +2,12 @@
    CSS Reset & Variables
    ========================================================================== */
 :root {
-    --bg-dark-blend: #fcf6f5;
-    --pastel-pink: #FAD0C4;
-    --pastel-purple: #E0C3FC;
-    --pastel-blue: #B3DDF2;
-    --pastel-peach: #FFD2C4;
-    --pastel-gold: #FFEAA5;
-    --pastel-green: #D4F1C9;
-    
-    --text-primary: #3d3431;
-    --text-secondary: #6B5E59;
-    --text-light: #FDFBF7;
+    --color-dark-primary: #263238; /* Dark Blue Gray */
+    --color-light-bg: #eceff1; /* Light Gray Blue */
+    --color-text-main: #37474f; /* Medium Dark Gray */
+    --color-text-secondary: #546e7a; /* Medium Gray Blue */
+    --color-accent-gold: #ffd700; /* Gold for subtle accents */
+    --color-accent-soft: #90a4ae; /* Soft Blue Gray for subtle elements */
     
     --font-serif: 'Playfair Display', Georgia, serif;
     --font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
@@ -22,9 +17,9 @@
     --transition-medium: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
     --transition-fast: all 0.2s ease;
     
-    --glass-bg: rgba(255, 255, 255, 0.45);
-    --glass-border: rgba(255, 255, 255, 0.5);
-    --glass-shadow: 0 8px 32px 0 rgba(107, 94, 89, 0.08);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -39,8 +34,8 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-family: var(--font-sans);
-    color: var(--text-primary);
-    background-color: var(--bg-dark-blend);
+    color: var(--color-text-main);
+    background-color: var(--color-light-bg);
     line-height: 1.6;
 }
 
@@ -56,7 +51,7 @@ html, body {
     z-index: 1;
     pointer-events: auto; /* Required for canvas cursor interaction */
     filter: blur(4px); /* Blend the metaballs together more softly */
-    background: radial-gradient(circle at 50% 50%, #fff7f5 0%, #faece9 100%);
+    background: radial-gradient(circle at 50% 50%, var(--color-light-bg) 0%, #dde1e6 100%);
 }
 
 .glow-overlay {
@@ -67,8 +62,8 @@ html, body {
     height: 100%;
     z-index: 1;
     pointer-events: none;
-    background: radial-gradient(circle at 10% 20%, rgba(250, 208, 196, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(224, 195, 252, 0.15) 0%, transparent 40%);
+    background: radial-gradient(circle at 10% 20%, rgba(144, 164, 174, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(144, 164, 174, 0.1) 0%, transparent 40%);
 }
 
 /* ==========================================================================
@@ -90,9 +85,9 @@ html, body {
 .logo {
     font-family: var(--font-cursive);
     font-size: 2rem;
-    color: var(--text-secondary);
-    text-shadow: 0 2px 4px rgba(255,255,255,0.5);
-    opacity: 0.85;
+    color: var(--color-text-secondary);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    opacity: 0.9;
     transform: translateY(0);
     transition: var(--transition-medium);
 }
@@ -104,7 +99,7 @@ html, body {
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
     padding: 10px 18px;
-    border-radius: 50px;
+    border-radius: 8px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -112,19 +107,19 @@ html, body {
     box-shadow: var(--glass-shadow);
     transition: var(--transition-medium);
     font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-secondary);
+    font-weight: 500;
+    color: var(--color-text-secondary);
     letter-spacing: 0.5px;
 }
 
 .control-btn:hover {
-    background: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.05);
 }
 
 .control-btn.locked {
-    opacity: 0.6;
+    opacity: 0.4;
     cursor: not-allowed;
 }
 
@@ -137,7 +132,7 @@ html, body {
 }
 
 .sound-icon {
-    fill: var(--text-secondary);
+    fill: var(--color-text-secondary);
     width: 100%;
     height: 100%;
     transition: var(--transition-fast);
@@ -193,7 +188,7 @@ html, body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
-    border-radius: 32px;
+    border-radius: 8px;
     box-shadow: var(--glass-shadow);
     display: flex;
     flex-direction: column;
@@ -241,42 +236,39 @@ html, body {
 
 .main-title {
     font-family: var(--font-serif);
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 400;
     line-height: 1.1;
-    color: var(--text-primary);
+    color: var(--color-text-main);
     margin-bottom: 8px;
-    background: linear-gradient(135deg, var(--text-primary) 30%, var(--text-secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 .slide-title {
     font-family: var(--font-serif);
-    font-size: 2.8rem;
+    font-size: 2.2rem;
     font-weight: 400;
-    color: var(--text-primary);
+    color: var(--color-text-main);
     line-height: 1.25;
 }
 
 .slide-text {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     font-weight: 300;
-    color: var(--text-secondary);
-    line-height: 1.8;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
 }
 
 .italic-text {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1.4rem;
-    opacity: 0.9;
+    font-size: 1.2rem;
+    color: var(--color-text-secondary);
 }
 
 .slide-subtext {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-style: italic;
-    color: var(--text-secondary);
+    color: var(--color-text-secondary);
     opacity: 0.7;
     margin-top: 8px;
 }
@@ -286,70 +278,44 @@ html, body {
    ========================================================================== */
 .primary-btn {
     position: relative;
-    background: linear-gradient(135deg, rgba(250, 208, 196, 0.8) 0%, rgba(255, 154, 158, 0.8) 100%);
+    background: var(--color-dark-primary);
     border: none;
     outline: none;
-    padding: 18px 40px;
-    border-radius: 50px;
-    color: var(--text-light);
+    padding: 12px 24px;
+    border-radius: 4px;
+    color: white;
     font-family: var(--font-sans);
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
     cursor: pointer;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(255, 154, 158, 0.25);
     transition: var(--transition-medium);
 }
 
 .primary-btn:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(255, 154, 158, 0.35);
-}
-
-.primary-btn:active {
+    background: #37474f;
     transform: translateY(-1px);
 }
 
 .btn-glow {
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 60%);
-    pointer-events: none;
-    transform: translate(0, 0);
-    transition: transform 0.5s ease-out;
-}
-
-.primary-btn:hover .btn-glow {
-    transform: translate(10%, 10%);
-}
-
-.btn-content {
-    position: relative;
-    z-index: 2;
-    text-shadow: 0 1px 2px rgba(107, 94, 89, 0.1);
+    display: none;
 }
 
 .secondary-btn {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    padding: 14px 32px;
-    border-radius: 50px;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    font-weight: 600;
+    background: transparent;
+    border: 1px solid var(--color-text-secondary);
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: var(--color-text-secondary);
+    font-size: 0.8rem;
+    font-weight: 500;
     cursor: pointer;
     transition: var(--transition-medium);
-    box-shadow: var(--glass-shadow);
 }
 
 .secondary-btn:hover {
-    background: rgba(255,255,255,0.7);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+    background: rgba(84, 110, 122, 0.1);
 }
 
 /* Navigation footer containing next/prev controls */
@@ -367,107 +333,80 @@ html, body {
     border: none;
     outline: none;
     font-family: var(--font-sans);
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
-    color: var(--text-secondary);
+    color: var(--color-text-secondary);
     opacity: 0.6;
     transition: var(--transition-medium);
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 8px 12px;
+    border-radius: 4px;
 }
 
 .nav-btn:hover {
     opacity: 1;
-    background: rgba(255,255,255,0.3);
+    background: rgba(0,0,0,0.05);
 }
 
 .btn-next {
-    color: #df8b8e;
+    color: var(--color-dark-primary);
     opacity: 0.85;
 }
 
 .btn-next:hover {
-    background: rgba(250, 208, 196, 0.25);
+    background: rgba(38, 50, 56, 0.1);
 }
 
-/* ==========================================================================
-   Screen 3 Specific: Garden of Gratitude Nodes
-   ========================================================================== */
+/* Screen 3 Specific: Garden of Gratitude Nodes */
 .nodes-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
+    gap: 12px;
     width: 100%;
-    height: 120px;
+    height: 100px;
     align-items: center;
     justify-items: center;
     margin: 20px 0;
 }
 
 .garden-node {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1.1rem;
+    font-size: 1rem;
     position: relative;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                box-shadow 0.4s ease, 
-                background-color 0.4s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, 
+                box-shadow 0.3s ease, 
+                background-color 0.3s ease;
 }
 
-/* Generate different organic colors for garden seeds */
-.garden-node:nth-child(1) { background: radial-gradient(circle at 30% 30%, #FFD2C4, #FFA8A8); box-shadow: 0 8px 20px rgba(255, 168, 168, 0.4); }
-.garden-node:nth-child(2) { background: radial-gradient(circle at 30% 30%, #E0C3FC, #C299FC); box-shadow: 0 8px 20px rgba(194, 153, 252, 0.4); }
-.garden-node:nth-child(3) { background: radial-gradient(circle at 30% 30%, #B3DDF2, #81C7EB); box-shadow: 0 8px 20px rgba(129, 199, 235, 0.4); }
-.garden-node:nth-child(4) { background: radial-gradient(circle at 30% 30%, #FFEAA5, #FFD043); box-shadow: 0 8px 20px rgba(255, 208, 67, 0.4); }
-.garden-node:nth-child(5) { background: radial-gradient(circle at 30% 30%, #D4F1C9, #A9E195); box-shadow: 0 8px 20px rgba(169, 225, 149, 0.4); }
+/* Organic, muted colors for garden nodes */
+.garden-node:nth-child(1) { background: #cfd8dc; }
+.garden-node:nth-child(2) { background: #b0bec5; }
+.garden-node:nth-child(3) { background: #90a4ae; }
+.garden-node:nth-child(4) { background: #78909c; }
+.garden-node:nth-child(5) { background: #546e7a; }
 
 .garden-node:hover {
-    transform: scale(1.22) translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 /* Pulsing aura ring around unclicked seeds */
 .garden-node::after {
-    content: '';
-    position: absolute;
-    top: -6px;
-    left: -6px;
-    right: -6px;
-    bottom: -6px;
-    border-radius: 50%;
-    border: 1.5px solid currentColor;
-    opacity: 0.35;
-    animation: pulseGlow 2.5s infinite ease-out;
+    display: none;
 }
-
-.garden-node:nth-child(1)::after { color: #FFA8A8; }
-.garden-node:nth-child(2)::after { color: #C299FC; }
-.garden-node:nth-child(3)::after { color: #81C7EB; }
-.garden-node:nth-child(4)::after { color: #FFD043; }
-.garden-node:nth-child(5)::after { color: #A9E195; }
 
 .garden-node.visited {
-    filter: saturate(0.75) brightness(0.98);
-}
-
-.garden-node.visited::after {
-    display: none; /* stop pulsing once clicked */
-}
-
-@keyframes pulseGlow {
-    0% { transform: scale(0.95); opacity: 0.4; }
-    50% { transform: scale(1.15); opacity: 0.15; }
-    100% { transform: scale(0.95); opacity: 0.4; }
+    filter: brightness(0.8);
 }
 
 /* Garden Message Overlay Box */
@@ -495,61 +434,46 @@ html, body {
 }
 
 .message-box-card {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: var(--color-light-bg);
+    border: 1px solid rgba(0,0,0,0.05);
     width: 90%;
     max-width: 480px;
-    padding: 40px;
-    border-radius: 28px;
-    box-shadow: 0 20px 50px rgba(107, 94, 89, 0.15);
+    padding: 30px;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     text-align: center;
     position: relative;
-    transform: scale(0.92) translateY(15px);
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
 }
 
 .message-box-overlay.active .message-box-card {
-    transform: scale(1) translateY(0);
+    transform: scale(1);
 }
 
 .close-msg-btn {
     position: absolute;
-    top: 16px;
-    right: 20px;
+    top: 10px;
+    right: 15px;
     background: none;
     border: none;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     cursor: pointer;
-    color: var(--text-secondary);
+    color: var(--color-text-secondary);
     opacity: 0.5;
     transition: var(--transition-fast);
 }
 
-.close-msg-btn:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
 .message-box-emoji {
-    font-size: 2.2rem;
-    margin-bottom: 16px;
-    animation: gentleFloat 3s infinite ease-in-out;
+    font-size: 1.5rem;
+    margin-bottom: 12px;
 }
 
 .message-box-text {
     font-family: var(--font-serif);
-    font-size: 1.35rem;
-    line-height: 1.7;
-    color: var(--text-primary);
-    font-style: italic;
-}
-
-@keyframes gentleFloat {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-    100% { transform: translateY(0); }
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text-main);
 }
 
 /* ==========================================================================
@@ -568,14 +492,14 @@ html, body {
 
 .heart-shape {
     position: absolute;
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(circle at 40% 40%, #ffcbd5, #ff9aa8);
+    width: 60px;
+    height: 60px;
+    background: #b0bec5;
     transform: rotate(-45deg);
-    border-radius: 5px;
-    box-shadow: 0 10px 30px rgba(255, 154, 168, 0.45);
+    border-radius: 2px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     z-index: 5;
-    transition: transform 0.2s ease, background 0.5s ease;
+    transition: transform 0.2s ease, background 0.3s ease;
     animation: heartbeatRegular 1.8s infinite ease-in-out;
 }
 
@@ -583,39 +507,28 @@ html, body {
 .heart-shape::after {
     content: '';
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background: inherit;
 }
 
 .heart-shape::before {
-    top: -40px;
+    top: -30px;
     left: 0;
 }
 
 .heart-shape::after {
     top: 0;
-    left: 40px;
+    left: 30px;
 }
 
 .heart-container:hover .heart-shape {
-    background: radial-gradient(circle at 40% 40%, #ffdfdf, #ff7a8e);
-}
-
-.heart-container:active .heart-shape {
-    transform: rotate(-45deg) scale(0.92);
+    background: #78909c;
 }
 
 .heart-pulse-ring {
-    position: absolute;
-    border: 1px solid rgba(255, 154, 168, 0.4);
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    opacity: 0;
-    pointer-events: none;
+    border: 1px solid rgba(144, 164, 174, 0.3);
 }
 
 .ring-1 {
@@ -644,26 +557,23 @@ html, body {
    Screen 5 Specific: Final letter card
    ========================================================================== */
 .final-letter-heart {
-    font-size: 3rem;
-    color: #ff9aa8;
-    text-shadow: 0 2px 10px rgba(255, 154, 168, 0.3);
-    animation: breathingScale 3s infinite ease-in-out;
+    font-size: 2rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
 }
 
 .final-title {
     font-family: var(--font-serif);
-    font-size: 3.5rem;
-    color: var(--text-primary);
+    font-size: 2.5rem;
+    color: var(--color-dark-primary);
     text-align: center;
     line-height: 1.2;
 }
 
 .final-message-card {
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    padding: 36px;
-    border-radius: 24px;
-    box-shadow: 0 10px 30px rgba(107, 94, 89, 0.05);
+    background: transparent;
+    border: none;
+    padding: 24px 0;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -672,24 +582,24 @@ html, body {
 }
 
 .final-para {
-    font-size: 1.15rem;
-    color: var(--text-secondary);
-    line-height: 1.75;
+    font-size: 1rem;
+    color: var(--color-text-main);
+    line-height: 1.6;
 }
 
 .final-para.signatures {
     font-family: var(--font-serif);
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-style: italic;
-    color: var(--text-primary);
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--color-text-main);
+    border-top: 1px solid rgba(0,0,0,0.1);
     padding-top: 16px;
 }
 
 .love-signature {
     font-family: var(--font-cursive);
-    font-size: 2.8rem;
-    color: #df8b8e;
+    font-size: 2rem;
+    color: var(--color-text-secondary);
     line-height: 1;
 }
 
